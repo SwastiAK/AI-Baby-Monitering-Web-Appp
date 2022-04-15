@@ -1,10 +1,10 @@
-img = "";
+song = "";
 objects = [];
 status = "";
 
 function preload()
 {
-    song = loadSound("music.mp3");
+    song = loadSound("who_can_be_now.mp3");
 }
 
 function setup()
@@ -38,7 +38,10 @@ function draw()
 {
     image(video, 0, 0, 380, 380);
 
-    if(status != "")
+    song_who_can_it_be_now.isPlaying();
+    console.log(song_who_can_it_be_now);
+
+    if( baby_found != "")
     {
         r = random(255);
         g = random(255);
@@ -57,5 +60,20 @@ function draw()
             stroke(r, g, b);
             rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
         }
+
+             if(objects[i].label == "person")
+             {
+                 document.getElementById("number_of_objects").innerHTML = "Baby Found";
+                 console.log("stop");
+                 song.stop();
+             }
+
+             else
+             {
+                 document.getElementById("number_of_objects").innerHTML = "Baby Not Found";
+                 console.log("play");
+                 song.play();
+             }
+    
     }
 }
