@@ -4,7 +4,7 @@ status = "";
 
 function preload()
 {
-    song = loadSound("who_can_be_now.mp3");
+    song = loadSound("sound.mp3");
 }
 
 function setup()
@@ -38,10 +38,9 @@ function draw()
 {
     image(video, 0, 0, 380, 380);
 
-    song_who_can_it_be_now.isPlaying();
-    console.log(song_who_can_it_be_now);
+    
 
-    if( baby_found != "")
+    if( status != "")
     {
         r = random(255);
         g = random(255);
@@ -51,15 +50,13 @@ function draw()
         for(i = 0; i < objects.length; i++)
         {
             document.getElementById("status").innerHTML = "Status: Detecting Objects";
-            document.getElementById("number_of_objects").innerHTML = "Number of Objects Detected are: " + objects.length;
-
             fill(r, g, b);
             percent = floor(objects[i].confidence * 100);
             text(objects[i].label + "  " + percent + "%", objects[i].x + 15, objects[i].y + 15);
             noFill();
             stroke(r, g, b);
             rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
-        }
+
 
              if(objects[i].label == "person")
              {
@@ -69,6 +66,14 @@ function draw()
              }
 
              else
+             {
+                 document.getElementById("number_of_objects").innerHTML = "Baby Not Found";
+                 console.log("play");
+                 song.play();
+             }
+        }
+
+             if(objects.length == 0)
              {
                  document.getElementById("number_of_objects").innerHTML = "Baby Not Found";
                  console.log("play");
